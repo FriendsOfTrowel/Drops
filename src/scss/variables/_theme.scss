@@ -46,6 +46,7 @@ $drops--margin: (
   '-tooltip': 0.75rem,
   '-popover': 0.75rem,
 ) !default;
+$drops--z-index: 1000 !default;
 
 $drops-caret--base: (
   'default': 0,
@@ -85,6 +86,8 @@ $drops-anchor--color: rgb(0, 0, 0) !default;
 $drops-anchor--background-color: (
   ':hover': rgb(245, 245, 245),
 ) !default;
+
+$drops-divider--margin: 0.625em 0 !default;
 
 $drops-header--padding-y: 0.5rem !default;
 $drops-header--font-size: 1rem !default;

@@ -46,6 +46,7 @@ $drop--selector: selector--constructor($drops--synthax, 'drop');
   @include declaration('min-width', $drops--min-width);
   @include declaration('max-width', $drops--max-width);
   @include declaration('width', $drops--width);
+  @include declaration('z-index', $drops--z-index);
   @include declaration('-include-drops--gutter', $drops--margin);
 
   @include block-generation($drop--selector);
@@ -166,6 +167,7 @@ $drop-divider--selector: selector--set-element($drop--selector, 'divider');
 @include selector($drop-divider--selector) {
   @include declaration('-include-drops-divider--border-width', $drops--border-width);
   @include declaration('border-color', $drops--border-color);
+  @include declaration('margin', $drops-divider--margin);
   @include block-generation($drop-divider--selector);
 }
 
