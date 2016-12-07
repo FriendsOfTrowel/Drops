@@ -215,6 +215,8 @@ class TrowelDrop {
             this._drop.style.display = 'none';
             this._generateEvent('display.trowel.drops');
         }
+
+        this._tether.position();
     }
 
     _listener() {
