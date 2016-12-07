@@ -46,6 +46,7 @@ $drop--selector: selector--constructor($drops--synthax, 'drop');
   @include declaration('min-width', $drops--min-width);
   @include declaration('max-width', $drops--max-width);
   @include declaration('width', $drops--width);
+  @include declaration('z-index', $drops--z-index);
   @include declaration('-include-drops--gutter', $drops--margin);
 
   @include block-generation($drop--selector);

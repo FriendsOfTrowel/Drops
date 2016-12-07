@@ -46,6 +46,7 @@ $drops--margin: (
   '-tooltip': 0.75rem,
   '-popover': 0.75rem,
 ) !default;
+$drops--z-index: 1000 !default;
 
 $drops-caret--base: (
   'default': 0,
