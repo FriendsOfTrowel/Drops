@@ -1,0 +1,14 @@
+{
+  "stylevendors": [
+    "@bower/trowel-trowel-drops/src/scss/drops.scss"
+  ],
+  "scriptvendors": [
+    "@bower/trowel-trowel-drops/dest/javascript/drops.min.js"
+  ],
+  "stylegui": [
+    "@bower/trowel-trowel-drops//drops-styleguide.scss"
+  ],
+  "templategui": [
+    "@bower/trowel-trowel-drops//drops-styleguide.html.twig"
+  ]
+}

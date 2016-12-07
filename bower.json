@@ -1,0 +1,42 @@
+{
+  "name": "trowel-drops",
+  "homepage": "https://github.com/FriendsOfTrowel/Drops",
+  "authors": [
+    "Loïc Goyet <loic@troopers.email>"
+  ],
+  "description": "The official Trowel Component for drops",
+  "main": [
+    "src/scss/drops.scss",
+    "dest/javascript/drops.js",
+    "injector.json"
+  ],
+  "moduleType": "globals",
+  "keywords": [
+    "scss",
+    "css",
+    "javascript",
+    "js",
+    "trowel",
+    "trowel-drops",
+    "drop"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "node_modules",
+    "bower_components",
+    "test",
+    ".bowerrc",
+    ".gitignore",
+    "gulpfile.js",
+    "package.json",
+    "sache.json"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/FriendsOfTrowel/Drops.git"
+  },
+  "dependencies": {
+    "trowel-core": "^1.3.0",
+    "tether": "^1.3.8"
+  }
+}

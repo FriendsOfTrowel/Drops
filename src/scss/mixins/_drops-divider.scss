@@ -1,0 +1,3 @@
+@mixin drops-divider--border-width($value, $flags) {
+  @include declaration('border-width', $value 0 0, $flags);
+}

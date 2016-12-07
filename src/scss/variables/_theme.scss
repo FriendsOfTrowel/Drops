@@ -1,0 +1,99 @@
+$drops--font-size: (
+  'default': 1rem,
+  '-tooltip': 0.875rem,
+) !default;
+$drops--font-family: null !default;
+$drops--font-weight: null !default;
+$drops--text-transform: null !default;
+$drops--letter-spacing: null !default;
+$drops--line-height: null !default;
+$drops--text-align: left !default;
+$drops--text-decoration: null !default;
+$drops--margin: null !default;
+$drops--min-width: (
+  'default': 10em,
+  '-tooltip': 0,
+) !default;
+$drops--max-width: 20em !default;
+$drops--width: null !default;
+$drops--border-width: (
+  'default': 1px,
+  '-tooltip': 0,
+) !default;
+$drops--border-style: solid !default;
+$drops--border-color: (
+  'default': rgba(0, 0, 0, 0.15),
+  '-tooltip': rgb(0, 0, 0),
+) !default;
+$drops--border-radius: (
+  'default': 0.25em,
+  '-tooltip': 0.285714286em,
+) !default;
+$drops--color: (
+  '-tooltip': rgb(255, 255, 255),
+) !default;
+$drops--box-shadow: null !default;
+$drops--background: null !default;
+$drops--background-color: (
+  'default': rgb(255, 255, 255),
+  '-tooltip': rgb(0, 0, 0),
+) !default;
+$drops--padding-x: (
+  'default': 1.5rem,
+  '-tooltip': 0.571428571em,
+) !default;
+$drops--margin: (
+  '-tooltip': 0.75rem,
+  '-popover': 0.75rem,
+) !default;
+
+$drops-caret--base: (
+  'default': 0,
+  '-popover': 20px,
+  '-tooltip': 10px,
+) !default;
+$drops-caret--height: (
+  'default': 0,
+  '-popover': 10px,
+  '-tooltip': 5px,
+) !default;
+
+$drops-menu--padding-y: 0.5rem !default;
+$drops-menu--margin: null !default;
+$drops-menu--font-size: null !default;
+$drops-menu--color: null !default;
+$drops-menu--text-align: null !default;
+$drops-menu--background-color: null !default;
+
+$drops-heading--padding-y: 0.5rem !default;
+$drops-heading--font-size: 0.875rem !default;
+$drops-heading--line-height: 1.1 !default;
+$drops-heading--letter-spacing: null !default;
+$drops-heading--font-weight: 500 !default;
+$drops-heading--text-transform: null !default;
+$drops-heading--text-decoration: null !default;
+$drops-heading--color: #818a91 !default;
+
+$drops-anchor--padding-y: 0.1875rem !default;
+$drops-anchor--font-size: null !default;
+$drops-anchor--line-height: null !default;
+$drops-anchor--letter-spacing: null !default;
+$drops-anchor--font-weight: null !default;
+$drops-anchor--text-transform: null !default;
+$drops-anchor--text-decoration: none !default;
+$drops-anchor--color: rgb(0, 0, 0) !default;
+$drops-anchor--background-color: (
+  ':hover': rgb(245, 245, 245),
+) !default;
+
+$drops-header--padding-y: 0.5rem !default;
+$drops-header--font-size: 1rem !default;
+$drops-header--background-color: rgb(247, 247, 247) !default;
+$drops-header--border-bottom: 1px solid rgb(235, 235, 235) !default;
+$drops-header--font-weight: 500 !default;
+$drops-header--color: inherit !default;
+
+$drops-content--padding-y: (
+  'default': 0.5625rem,
+  '-tooltip': 0.214285714em,
+) !default;

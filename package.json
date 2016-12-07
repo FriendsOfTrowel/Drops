@@ -1,0 +1,49 @@
+{
+  "name": "trowel-drops",
+  "version": "0.0.0",
+  "description": "The official Trowel Component for drops",
+  "scripts": {
+    "test": "gulp",
+    "start": "gulp watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/FriendsOfTrowel/Drops.git"
+  },
+  "author": "Loïc Goyet <loic@troopers.email>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/FriendsOfTrowel/Drops/issues"
+  },
+  "files": [
+    "src/scss/drops.scss",
+    "dest/javascript/drops.js",
+    "injector.json"
+  ],
+  "keywords": [
+    "scss",
+    "css",
+    "javascript",
+    "js",
+    "trowel",
+    "trowel-drops",
+    "drop"
+  ],
+  "homepage": "https://github.com/FriendsOfTrowel/Drops#readme",
+  "devDependencies": {
+    "babel-preset-es2015": "^6.18.0",
+    "browser-sync": "^2.18.2",
+    "gulp": "^3.9.1",
+    "gulp-autoprefixer": "^3.1.1",
+    "gulp-babel": "^6.1.2",
+    "gulp-cssmin": "^0.1.7",
+    "gulp-load-plugins": "^1.4.0",
+    "gulp-notify": "^2.2.0",
+    "gulp-prettify": "^0.5.0",
+    "gulp-rename": "^1.2.2",
+    "gulp-sass": "^2.3.2",
+    "gulp-size": "^2.1.0",
+    "gulp-sourcemaps": "^1.9.1",
+    "run-sequence": "^1.2.2"
+  }
+}
