@@ -34,14 +34,17 @@ class TrowelDrop {
             throw new Error('Bootstrap tooltips require Tether (http://tether.io/)')
         }
 
-        this._trigger = trigger;
-        this._drop = document.querySelector(this._trigger.getAttribute('data-href'));
-        this._options = this.setOptions(options);
-        this._tether = new Tether(this.getTetherOptions(this._options));
-        this._visible = this._options.visible;
-        this.turnVisibility();
-        this.setGutterPositions();
-        this._listener();
+        if (typeof(trigger) == 'object') {
+            this._trigger = trigger;
+            this._drop = document.querySelector(this._trigger.getAttribute('data-href'));
+            this._options = this.setOptions(options);
+            this._tether = new Tether(this.getTetherOptions(this._options));
+            this._visible = this._options.visible;
+            this.turnVisibility();
+            this.setGutterPositions();
+            this._listener();
+        }
+
     }
 
     setOptions(options) {
