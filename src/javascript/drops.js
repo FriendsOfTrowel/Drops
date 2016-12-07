@@ -22,9 +22,9 @@ let mergeDeep = (target, source) => {
 
 class TrowelDrops {
     constructor(elements) {
-        elements.forEach(function(element, index) {
-            let element_obj = new TrowelDrop(element);
-        })
+        for (let element in elements) {
+            let element_obj = new TrowelDrop(elements[element]);
+        }
     }
 }
 
