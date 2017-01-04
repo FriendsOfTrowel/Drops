@@ -15,11 +15,6 @@
   "bugs": {
     "url": "https://github.com/FriendsOfTrowel/Drops/issues"
   },
-  "files": [
-    "src/scss/drops.scss",
-    "dest/javascript/drops.js",
-    "injector.json"
-  ],
   "keywords": [
     "scss",
     "css",
