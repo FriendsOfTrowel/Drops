@@ -29,12 +29,11 @@ You can also download a zip archive [right here](https://github.com/FriendsOfTro
 The main scss file to include to your main `.scss` file is located at the `./src/scss/drops.scss`. As a *Trowel Component*, it also requires two dependencies to compile the *scss* code. Here an *scss* installation snippet.
 
 ```
-// Trowel Dependencies
-@import './path/to/dependencies/sassy-maps/sass/sassy-maps';
+// Trowel Core Dependency
 @import './path/to/dependencies/trowel-core/src/trowel';
 
 // Trowel Components Drops
-@import './path/to/dependencies/src/scss/drops.scss';
+@import './path/to/dependencies/trowel-drops/src/scss/drops.scss';
 ```
 
 #### *JavaScript*

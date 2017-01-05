@@ -1,6 +1,6 @@
 {
   "name": "trowel-drops",
-  "version": "0.2.0",
+  "version": "1.0.0",
   "description": "The official Trowel Component for drops",
   "scripts": {
     "test": "gulp",
@@ -40,5 +40,8 @@
     "gulp-size": "^2.1.0",
     "gulp-sourcemaps": "^1.9.1",
     "run-sequence": "^1.2.2"
+  },
+  "dependencies": {
+    "trowel-core": "^2.0.0"
   }
 }
