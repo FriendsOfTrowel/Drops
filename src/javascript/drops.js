@@ -220,26 +220,32 @@ class TrowelDrop {
     }
 
     _listener() {
-        if (this._options.behavior == 'click') {
-            this._trigger.addEventListener('click', function(event) {
-                this.toggle();
-            }.bind(this), false);
+        switch (this._options.behavior) {
+            case 'click':
+                this._trigger.addEventListener('click', function(event) {
+                    this.toggle();
+                }.bind(this), false);
 
-            document.addEventListener('click', function(event) {
-                var isClickInside = this._trigger.contains(event.target);
+                document.addEventListener('click', function(event) {
+                    var isClickInside = this._trigger.contains(event.target);
 
-                if (!isClickInside && this.isShown()) {
-                    this.hide();
-                }
-            }.bind(this), false);
-        } else {
-            this._trigger.addEventListener('mouseenter', function(event) {
-                this.show();
-            }.bind(this), false);
+                    if (!isClickInside && this.isShown()) {
+                        this.hide();
+                    }
+                }.bind(this), false);
+                break;
+            case 'hover':
+                this._trigger.addEventListener('mouseenter', function(event) {
+                    this.show();
+                }.bind(this), false);
 
-            this._trigger.addEventListener('mouseout', function(event) {
-                this.hide();
-            }.bind(this), false);
+                this._trigger.addEventListener('mouseout', function(event) {
+                    if (!this._trigger.contains(event.toElement)) {
+                        this.hide();
+                    }
+                }.bind(this), false);
+
+                break;
         }
     }
 
