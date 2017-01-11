@@ -1,6 +1,6 @@
 {
   "name": "trowel-drops",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "The official Trowel Component for drops",
   "scripts": {
     "test": "gulp",
