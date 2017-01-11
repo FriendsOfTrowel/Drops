@@ -1,9 +1,10 @@
-$drops--prefix: 'c' !default;
 $drops--synthax: (
-  'prefix': $drops--prefix,
+  'prefix': 'c',
   'separator': (
     'prefix': '-',
     'element': '__',
     'modifier': '--',
   ),
-);
+) !default;
+
+$drops--synthax: null !default;
