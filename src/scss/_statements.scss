@@ -24,7 +24,7 @@
 /**
  * drop
  */
-$drop--selector: selector--constructor($drops--synthax, 'drop');
+$drop--selector: selector--constructor($drops--syntax, 'drop');
 
 @include selector($drop--selector) {
   @include declaration('font-size', $drops--font-size);
