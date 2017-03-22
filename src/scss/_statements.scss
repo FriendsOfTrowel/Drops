@@ -24,184 +24,176 @@
 /**
  * drop
  */
-$drop--selector: selector--constructor($drops--syntax, 'drop');
+$drop--selector: selector(new 'drop' with $drops--syntax);
 
-@include selector($drop--selector) {
-  @include declaration('font-size', $drops--font-size);
-  @include declaration('font-family', $drops--font-family);
-  @include declaration('font-weight', $drops--font-weight);
-  @include declaration('text-transform', $drops--text-transform);
-  @include declaration('letter-spacing', $drops--letter-spacing);
-  @include declaration('line-height', $drops--line-height);
-  @include declaration('text-align', $drops--text-align);
-  @include declaration('text-decoration', $drops--text-decoration);
-  @include declaration('border-width', $drops--border-width);
-  @include declaration('border-style', $drops--border-style);
-  @include declaration('border-color', $drops--border-color);
-  @include declaration('border-radius', $drops--border-radius);
-  @include declaration('color', $drops--color);
-  @include declaration('box-shadow', $drops--box-shadow);
-  @include declaration('background', $drops--background);
-  @include declaration('background-color', $drops--background-color);
-  @include declaration('min-width', $drops--min-width);
-  @include declaration('max-width', $drops--max-width);
-  @include declaration('width', $drops--width);
-  @include declaration('z-index', $drops--z-index);
-  @include declaration('-include-drops--gutter', $drops--margin);
+@include statement($drop--selector,(
+  (font-size, $drops--font-size),
+  (font-family, $drops--font-family),
+  (font-weight, $drops--font-weight),
+  (text-transform, $drops--text-transform),
+  (letter-spacing, $drops--letter-spacing),
+  (line-height, $drops--line-height),
+  (text-align, $drops--text-align),
+  (text-decoration, $drops--text-decoration),
+  (border-width, $drops--border-width),
+  (border-style, $drops--border-style),
+  (border-color, $drops--border-color),
+  (border-radius, $drops--border-radius),
+  (color, $drops--color),
+  (box-shadow, $drops--box-shadow),
+  (background, $drops--background),
+  (background-color, $drops--background-color),
+  (min-width, $drops--min-width),
+  (max-width, $drops--max-width),
+  (width, $drops--width),
+  (z-index, $drops--z-index),
+  ('-include-drops--gutter', $drops--margin),
+));
 
-  @include block-generation($drop--selector);
-}
+
 
 /**
  * caret
  */
-$drop-before--selector: selector--set-pseudo-element($drop--selector, 'before');
+$drop-before--selector: selector(set $drop--selector pseudo-element 'before');
 
-@include selector($drop-before--selector) {
-  @include declaration('content', '');
-  @include declaration('position', absolute);
-  @include declaration('z-index', 1);
+@include statement($drop-before--selector,(
+  (content, ''),
+  (position, absolute),
+  (z-index, 1),
 
-  @include declaration('-include-drops-caret--base', $drops-caret--base);
-  @include declaration('-include-drops-caret--shape', $drops-caret--height);
-  @include declaration('-include-drops-caret--color', $drops--border-color);
-  @include declaration('-include-drops-caret--position', null);
-  @include declaration('-include-drops-caret--margin', $drops--border-width);
+  ('-include-drops-caret--base', $drops-caret--base),
+  ('-include-drops-caret--shape', $drops-caret--height),
+  ('-include-drops-caret--color', $drops--border-color),
+  ('-include-drops-caret--position', null),
+  ('-include-drops-caret--margin', $drops--border-width),
+));
 
-  @include block-generation($drop-before--selector);
-}
 
-$drop-after--selector: selector--set-pseudo-element($drop--selector, 'after');
+$drop-after--selector: selector(set $drop--selector pseudo-element 'after');
 
-@include selector($drop-after--selector) {
-  @include declaration('content', '');
-  @include declaration('position', absolute);
-  @include declaration('z-index', 2);
+@include statement($drop-after--selector,(
+  (content, ''),
+  (position, absolute),
+  (z-index, 2),
 
-  @include declaration('-include-drops-caret--base', $drops-caret--base);
-  @include declaration('-include-drops-caret--shape', $drops-caret--height);
-  @include declaration('-include-drops-caret--color', $drops--background-color);
-  @include declaration('-include-drops-caret--position', null);
+  ('-include-drops-caret--base', $drops-caret--base),
+  ('-include-drops-caret--shape', $drops-caret--height),
+  ('-include-drops-caret--color', $drops--background-color),
+  ('-include-drops-caret--position', null),
+));
 
-  @include block-generation($drop-after--selector);
-}
 
 /**
  * menu
  */
-$drop-menu--selector: selector--set-element($drop--selector, 'menu');
+$drop-menu--selector: selector(set $drop--selector element 'menu');
 
-@include selector($drop-menu--selector) {
-  @include declaration('padding-top', $drops-menu--padding-y);
-  @include declaration('padding-bottom', $drops-menu--padding-y);
-  @include declaration('margin', $drops-menu--margin);
-  @include declaration('font-size', $drops-menu--font-size);
-  @include declaration('color', $drops-menu--color);
-  @include declaration('text-align', $drops-menu--text-align);
-  @include declaration('background-color', $drops-menu--background-color);
-  @include declaration('background-clip', padding-box);
-  @include block-generation($drop-menu--selector);
-}
+@include statement($drop-menu--selector, (
+  (padding-top, $drops-menu--padding-y),
+  (padding-bottom, $drops-menu--padding-y),
+  (margin, $drops-menu--margin),
+  (font-size, $drops-menu--font-size),
+  (color, $drops-menu--color),
+  (text-align, $drops-menu--text-align),
+  (background-color, $drops-menu--background-color),
+  (background-clip, padding-box),
+));
 
 
 /**
  * heading
  */
-$drop-heading--selector: selector--set-element($drop--selector, 'heading');
+$drop-heading--selector: selector(set $drop--selector element 'heading');
 
-@include selector($drop-heading--selector) {
-  @include declaration('padding-top', $drops-heading--padding-y);
-  @include declaration('padding-bottom', $drops-heading--padding-y);
-  @include declaration('padding-left', $drops--padding-x);
-  @include declaration('padding-right', $drops--padding-x);
-  @include declaration('font-size', $drops-heading--font-size);
-  @include declaration('line-height', $drops-heading--line-height);
-  @include declaration('letter-spacing', $drops-heading--letter-spacing);
-  @include declaration('font-weight', $drops-heading--font-weight);
-  @include declaration('text-transform', $drops-heading--text-transform);
-  @include declaration('text-decoration', $drops-heading--text-decoration);
-  @include declaration('color', $drops-heading--color);
+@include statement($drop-heading--selector,(
+  (padding-top, $drops-heading--padding-y),
+  (padding-bottom, $drops-heading--padding-y),
+  (padding-left, $drops--padding-x),
+  (padding-right, $drops--padding-x),
+  (font-size, $drops-heading--font-size),
+  (line-height, $drops-heading--line-height),
+  (letter-spacing, $drops-heading--letter-spacing),
+  (font-weight, $drops-heading--font-weight),
+  (text-transform, $drops-heading--text-transform),
+  (text-decoration, $drops-heading--text-decoration),
+  (color, $drops-heading--color),
 
-  @include declaration('display', block);
-  @include declaration('margin', 0);
-  @include declaration('white-space', nowrap);
-  @include block-generation($drop-heading--selector);
-}
+  (display, block),
+  (margin, 0),
+  (white-space, nowrap),
+));
 
 
 /**
  * anchor
  */
-$drop-anchor--selector: selector--set-element($drop--selector, 'anchor');
+$drop-anchor--selector: selector(set $drop--selector element 'anchor');
 
-@include selector($drop-anchor--selector) {
-  @include declaration('padding-top', $drops-anchor--padding-y);
-  @include declaration('padding-bottom', $drops-anchor--padding-y);
-  @include declaration('padding-left', $drops--padding-x);
-  @include declaration('padding-right', $drops--padding-x);
-  @include declaration('font-size', $drops-anchor--font-size);
-  @include declaration('line-height', $drops-anchor--line-height);
-  @include declaration('letter-spacing', $drops-anchor--letter-spacing);
-  @include declaration('font-weight', $drops-anchor--font-weight);
-  @include declaration('text-transform', $drops-anchor--text-transform);
-  @include declaration('text-decoration', $drops-anchor--text-decoration);
-  @include declaration('color', $drops-anchor--color);
-  @include declaration('background-color', $drops-anchor--background-color);
+@include statement($drop-anchor--selector, (
+  (padding-top, $drops-anchor--padding-y),
+  (padding-bottom, $drops-anchor--padding-y),
+  (padding-left, $drops--padding-x),
+  (padding-right, $drops--padding-x),
+  (font-size, $drops-anchor--font-size),
+  (line-height, $drops-anchor--line-height),
+  (letter-spacing, $drops-anchor--letter-spacing),
+  (font-weight, $drops-anchor--font-weight),
+  (text-transform, $drops-anchor--text-transform),
+  (text-decoration, $drops-anchor--text-decoration),
+  (color, $drops-anchor--color),
+  (background-color, $drops-anchor--background-color),
 
-  @include declaration('display', block);
-  @include declaration('width', 100%, ('<button'));
-  @include declaration('text-align', inherit, ('<button'));
-  @include declaration('clear', both);
-  @include declaration('background', none, ('<button'));
-  @include declaration('border', 0, ('<button'));
-  @include declaration('white-space', no-wrap);
-  @include block-generation($drop-anchor--selector);
-}
+  (display, block),
+  (width, 100%, ('<button')),
+  (text-align, inherit, ('<button')),
+  (clear, both),
+  (background, none, ('<button')),
+  (border, 0, ('<button')),
+  (white-space, no-wrap),
+));
 
 
 /**
  * divider
  */
-$drop-divider--selector: selector--set-element($drop--selector, 'divider');
+$drop-divider--selector: selector(set $drop--selector element 'divider');
 
-@include selector($drop-divider--selector) {
-  @include declaration('-include-drops-divider--border-width', $drops--border-width);
-  @include declaration('border-color', $drops--border-color);
-  @include declaration('margin', $drops-divider--margin);
-  @include block-generation($drop-divider--selector);
-}
+@include statement($drop-divider--selector, (
+  ('-include-drops-divider--border-width', $drops--border-width),
+  (border-color, $drops--border-color),
+  (margin, $drops-divider--margin),
+));
 
 
 /**
  * header
  */
-$drop-header--selector: selector--set-element($drop--selector, 'header');
+$drop-header--selector: selector(set $drop--selector element 'header');
 
-@include selector($drop-header--selector) {
-  @include declaration('color', $drops-header--color);
-  @include declaration('font-weight', $drops-header--font-weight);
-  @include declaration('font-size', $drops-header--font-size);
-  @include declaration('padding-top', $drops-header--padding-y);
-  @include declaration('padding-bottom', $drops-header--padding-y);
-  @include declaration('padding-left', $drops--padding-x);
-  @include declaration('padding-right', $drops--padding-x);
-  @include declaration('background-color', $drops-header--background-color);
-  @include declaration('border-bottom', $drops-header--border-bottom);
-  @include declaration('margin', 0);
-  @include declaration('display', none, (':empty'));
-  @include block-generation($drop-header--selector);
-}
+@include statement($drop-header--selector, (
+  (color, $drops-header--color),
+  (font-weight, $drops-header--font-weight),
+  (font-size, $drops-header--font-size),
+  (padding-top, $drops-header--padding-y),
+  (padding-bottom, $drops-header--padding-y),
+  (padding-left, $drops--padding-x),
+  (padding-right, $drops--padding-x),
+  (background-color, $drops-header--background-color),
+  (border-bottom, $drops-header--border-bottom),
+  (margin, 0),
+  (display, none, (':empty')),
+));
 
 
 /**
  * content
  */
-$drop-content--selector: selector--set-element($drop--selector, 'content');
+$drop-content--selector: selector(set $drop--selector element 'content');
 
-@include selector($drop-content--selector) {
-  @include declaration('padding-top', $drops-content--padding-y);
-  @include declaration('padding-bottom', $drops-content--padding-y);
-  @include declaration('padding-left', $drops--padding-x);
-  @include declaration('padding-right', $drops--padding-x);
-  @include block-generation($drop-content--selector);
-}
+@include statement($drop-content--selector, (
+  (padding-top, $drops-content--padding-y),
+  (padding-bottom, $drops-content--padding-y),
+  (padding-left, $drops--padding-x),
+  (padding-right, $drops--padding-x),
+));
