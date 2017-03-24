@@ -1,1 +1,9 @@
-$drops--syntax: null !default;
+$drops--prefix: 'c' !default;
+$drops--syntax: (
+  'prefix': $drops--prefix,
+  'separator': (
+    'prefix': '-',
+    'element': '__',
+    'modifier': '--',
+  ),
+);
