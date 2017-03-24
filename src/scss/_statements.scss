@@ -1,53 +1,30 @@
 /**
- * Drops
- */
-
-@mixin mixin-dispatcher($value, $flags, $mixin) {
-  @if $mixin == 'drops-divider--border-width' {
-    @include drops-divider--border-width($value, $flags);
-  } @elseif $mixin == 'drops-caret--base' {
-    @include drops-caret--base($value, $flags);
-  } @elseif $mixin == 'drops-caret--shape' {
-    @include drops-caret--shape($value, $flags);
-  } @elseif $mixin == 'drops-caret--color' {
-    @include drops-caret--color($value, $flags);
-  } @elseif $mixin == 'drops-caret--position' {
-    @include drops-caret--position($value, $flags);
-  } @elseif $mixin == 'drops-caret--margin' {
-    @include drops-caret--margin($value, $flags);
-  } @elseif $mixin == 'drops--gutter' {
-    @include drops--gutter($value, $flags);
-  }
-};
-
-
-/**
  * drop
  */
 $drop--selector: selector(new 'drop' with $drops--syntax);
 
 @include statement($drop--selector,(
-  (font-size, $drops--font-size),
-  (font-family, $drops--font-family),
-  (font-weight, $drops--font-weight),
-  (text-transform, $drops--text-transform),
-  (letter-spacing, $drops--letter-spacing),
-  (line-height, $drops--line-height),
-  (text-align, $drops--text-align),
-  (text-decoration, $drops--text-decoration),
-  (border-width, $drops--border-width),
-  (border-style, $drops--border-style),
-  (border-color, $drops--border-color),
-  (border-radius, $drops--border-radius),
-  (color, $drops--color),
-  (box-shadow, $drops--box-shadow),
-  (background, $drops--background),
-  (background-color, $drops--background-color),
-  (min-width, $drops--min-width),
-  (max-width, $drops--max-width),
-  (width, $drops--width),
-  (z-index, $drops--z-index),
-  ('-include-drops--gutter', $drops--margin),
+  ('font-size', $drops--font-size),
+  ('font-family', $drops--font-family),
+  ('font-weight', $drops--font-weight),
+  ('text-transform', $drops--text-transform),
+  ('letter-spacing', $drops--letter-spacing),
+  ('line-height', $drops--line-height),
+  ('text-align', $drops--text-align),
+  ('text-decoration', $drops--text-decoration),
+  ('border-width', $drops--border-width),
+  ('border-style', $drops--border-style),
+  ('border-color', $drops--border-color),
+  ('border-radius', $drops--border-radius),
+  ('color', $drops--color),
+  ('box-shadow', $drops--box-shadow),
+  ('background', $drops--background),
+  ('background-color', $drops--background-color),
+  ('min-width', $drops--min-width),
+  ('max-width', $drops--max-width),
+  ('width', $drops--width),
+  ('z-index', $drops--z-index),
+  ('@include drops--gutter-mixin', $drops--margin),
 ));
 
 
@@ -58,29 +35,29 @@ $drop--selector: selector(new 'drop' with $drops--syntax);
 $drop-before--selector: selector(set $drop--selector pseudo-element 'before');
 
 @include statement($drop-before--selector,(
-  (content, ''),
-  (position, absolute),
-  (z-index, 1),
+  ('content', ''),
+  ('position', absolute),
+  ('z-index', 1),
 
-  ('-include-drops-caret--base', $drops-caret--base),
-  ('-include-drops-caret--shape', $drops-caret--height),
-  ('-include-drops-caret--color', $drops--border-color),
-  ('-include-drops-caret--position', null),
-  ('-include-drops-caret--margin', $drops--border-width),
+  ('@include drops-caret--base-mixin', $drops-caret--base),
+  ('@include drops-caret--shape-mixin', $drops-caret--height),
+  ('@include drops-caret--color-mixin', $drops--border-color),
+  ('@include drops-caret--position-mixin', null),
+  ('@include drops-caret--margin-mixin', $drops--border-width),
 ));
 
 
 $drop-after--selector: selector(set $drop--selector pseudo-element 'after');
 
 @include statement($drop-after--selector,(
-  (content, ''),
-  (position, absolute),
-  (z-index, 2),
+  ('content', ''),
+  ('position', absolute),
+  ('z-index', 2),
 
-  ('-include-drops-caret--base', $drops-caret--base),
-  ('-include-drops-caret--shape', $drops-caret--height),
-  ('-include-drops-caret--color', $drops--background-color),
-  ('-include-drops-caret--position', null),
+  ('@include drops-caret--base-mixin', $drops-caret--base),
+  ('@include drops-caret--shape-mixin', $drops-caret--height),
+  ('@include drops-caret--color-mixin', $drops--background-color),
+  ('@include drops-caret--position-mixin', null),
 ));
 
 
@@ -90,14 +67,14 @@ $drop-after--selector: selector(set $drop--selector pseudo-element 'after');
 $drop-menu--selector: selector(set $drop--selector element 'menu');
 
 @include statement($drop-menu--selector, (
-  (padding-top, $drops-menu--padding-y),
-  (padding-bottom, $drops-menu--padding-y),
-  (margin, $drops-menu--margin),
-  (font-size, $drops-menu--font-size),
-  (color, $drops-menu--color),
-  (text-align, $drops-menu--text-align),
-  (background-color, $drops-menu--background-color),
-  (background-clip, padding-box),
+  ('padding-top', $drops-menu--padding-y),
+  ('padding-bottom', $drops-menu--padding-y),
+  ('margin', $drops-menu--margin),
+  ('font-size', $drops-menu--font-size),
+  ('color', $drops-menu--color),
+  ('text-align', $drops-menu--text-align),
+  ('background-color', $drops-menu--background-color),
+  ('background-clip', padding-box),
 ));
 
 
@@ -107,21 +84,21 @@ $drop-menu--selector: selector(set $drop--selector element 'menu');
 $drop-heading--selector: selector(set $drop--selector element 'heading');
 
 @include statement($drop-heading--selector,(
-  (padding-top, $drops-heading--padding-y),
-  (padding-bottom, $drops-heading--padding-y),
-  (padding-left, $drops--padding-x),
-  (padding-right, $drops--padding-x),
-  (font-size, $drops-heading--font-size),
-  (line-height, $drops-heading--line-height),
-  (letter-spacing, $drops-heading--letter-spacing),
-  (font-weight, $drops-heading--font-weight),
-  (text-transform, $drops-heading--text-transform),
-  (text-decoration, $drops-heading--text-decoration),
-  (color, $drops-heading--color),
+  ('padding-top', $drops-heading--padding-y),
+  ('padding-bottom', $drops-heading--padding-y),
+  ('padding-left', $drops--padding-x),
+  ('padding-right', $drops--padding-x),
+  ('font-size', $drops-heading--font-size),
+  ('line-height', $drops-heading--line-height),
+  ('letter-spacing', $drops-heading--letter-spacing),
+  ('font-weight', $drops-heading--font-weight),
+  ('text-transform', $drops-heading--text-transform),
+  ('text-decoration', $drops-heading--text-decoration),
+  ('color', $drops-heading--color),
 
-  (display, block),
-  (margin, 0),
-  (white-space, nowrap),
+  ('display', block),
+  ('margin', 0),
+  ('white-space', nowrap),
 ));
 
 
@@ -131,26 +108,26 @@ $drop-heading--selector: selector(set $drop--selector element 'heading');
 $drop-anchor--selector: selector(set $drop--selector element 'anchor');
 
 @include statement($drop-anchor--selector, (
-  (padding-top, $drops-anchor--padding-y),
-  (padding-bottom, $drops-anchor--padding-y),
-  (padding-left, $drops--padding-x),
-  (padding-right, $drops--padding-x),
-  (font-size, $drops-anchor--font-size),
-  (line-height, $drops-anchor--line-height),
-  (letter-spacing, $drops-anchor--letter-spacing),
-  (font-weight, $drops-anchor--font-weight),
-  (text-transform, $drops-anchor--text-transform),
-  (text-decoration, $drops-anchor--text-decoration),
-  (color, $drops-anchor--color),
-  (background-color, $drops-anchor--background-color),
+  ('padding-top', $drops-anchor--padding-y),
+  ('padding-bottom', $drops-anchor--padding-y),
+  ('padding-left', $drops--padding-x),
+  ('padding-right', $drops--padding-x),
+  ('font-size', $drops-anchor--font-size),
+  ('line-height', $drops-anchor--line-height),
+  ('letter-spacing', $drops-anchor--letter-spacing),
+  ('font-weight', $drops-anchor--font-weight),
+  ('text-transform', $drops-anchor--text-transform),
+  ('text-decoration', $drops-anchor--text-decoration),
+  ('color', $drops-anchor--color),
+  ('background-color', $drops-anchor--background-color),
 
-  (display, block),
-  (width, 100%, ('<button')),
-  (text-align, inherit, ('<button')),
+  ('display', block),
+  ('width', 100%, ('<button')),
+  ('text-align', inherit, ('<button')),
   (clear, both),
-  (background, none, ('<button')),
+  ('background', none, ('<button')),
   (border, 0, ('<button')),
-  (white-space, no-wrap),
+  ('white-space', no-wrap),
 ));
 
 
@@ -160,9 +137,9 @@ $drop-anchor--selector: selector(set $drop--selector element 'anchor');
 $drop-divider--selector: selector(set $drop--selector element 'divider');
 
 @include statement($drop-divider--selector, (
-  ('-include-drops-divider--border-width', $drops--border-width),
-  (border-color, $drops--border-color),
-  (margin, $drops-divider--margin),
+  ('@include drops-divider--border-width-mixin', $drops--border-width),
+  ('border-color', $drops--border-color),
+  ('margin', $drops-divider--margin),
 ));
 
 
@@ -172,17 +149,17 @@ $drop-divider--selector: selector(set $drop--selector element 'divider');
 $drop-header--selector: selector(set $drop--selector element 'header');
 
 @include statement($drop-header--selector, (
-  (color, $drops-header--color),
-  (font-weight, $drops-header--font-weight),
-  (font-size, $drops-header--font-size),
-  (padding-top, $drops-header--padding-y),
-  (padding-bottom, $drops-header--padding-y),
-  (padding-left, $drops--padding-x),
-  (padding-right, $drops--padding-x),
-  (background-color, $drops-header--background-color),
-  (border-bottom, $drops-header--border-bottom),
-  (margin, 0),
-  (display, none, (':empty')),
+  ('color', $drops-header--color),
+  ('font-weight', $drops-header--font-weight),
+  ('font-size', $drops-header--font-size),
+  ('padding-top', $drops-header--padding-y),
+  ('padding-bottom', $drops-header--padding-y),
+  ('padding-left', $drops--padding-x),
+  ('padding-right', $drops--padding-x),
+  ('background-color', $drops-header--background-color),
+  ('border-bottom', $drops-header--border-bottom),
+  ('margin', 0),
+  ('display', none, (':empty')),
 ));
 
 
@@ -192,8 +169,8 @@ $drop-header--selector: selector(set $drop--selector element 'header');
 $drop-content--selector: selector(set $drop--selector element 'content');
 
 @include statement($drop-content--selector, (
-  (padding-top, $drops-content--padding-y),
-  (padding-bottom, $drops-content--padding-y),
-  (padding-left, $drops--padding-x),
-  (padding-right, $drops--padding-x),
+  ('padding-top', $drops-content--padding-y),
+  ('padding-bottom', $drops-content--padding-y),
+  ('padding-left', $drops--padding-x),
+  ('padding-right', $drops--padding-x),
 ));
