@@ -2,60 +2,66 @@
   @return append($flags, '[data-gutter~="#{$direction}"');
 }
 
-@mixin drops-caret--base($value, $flags) {
-  @include declaration('border-left', floor($value / 2) solid transparent, flags-gutter($flags, 'top'));
-  @include declaration('border-right', ceil($value / 2) solid transparent, flags-gutter($flags, 'top'));
-
-  @include declaration('border-top', floor($value / 2) solid transparent, flags-gutter($flags, 'right'));
-  @include declaration('border-bottom', ceil($value / 2) solid transparent, flags-gutter($flags, 'right'));
-
-  @include declaration('border-right', floor($value / 2) solid transparent, flags-gutter($flags, 'bottom'));
-  @include declaration('border-left', ceil($value / 2) solid transparent, flags-gutter($flags, 'bottom'));
-
-  @include declaration('border-bottom', floor($value / 2) solid transparent, flags-gutter($flags, 'left'));
-  @include declaration('border-top', ceil($value / 2) solid transparent, flags-gutter($flags, 'left'));
+@function drops-caret--base-mixin($value, $flags) {
+  @return (
+    ('border-left', floor($value / 2) solid transparent, flags-gutter($flags, 'top')),
+    ('border-right', ceil($value / 2) solid transparent, flags-gutter($flags, 'top')),
+    ('border-top', floor($value / 2) solid transparent, flags-gutter($flags, 'right')),
+    ('border-bottom', ceil($value / 2) solid transparent, flags-gutter($flags, 'right')),
+    ('border-right', floor($value / 2) solid transparent, flags-gutter($flags, 'bottom')),
+    ('border-left', ceil($value / 2) solid transparent, flags-gutter($flags, 'bottom')),
+    ('border-bottom', floor($value / 2) solid transparent, flags-gutter($flags, 'left')),
+    ('border-top', ceil($value / 2) solid transparent, flags-gutter($flags, 'left')),
+  );
 }
 
-@mixin drops-caret--shape($value, $flags) {
-  @include declaration('border-bottom-width', $value, flags-gutter($flags, 'top'));
-  @include declaration('border-bottom-style', solid, flags-gutter($flags, 'top'));
-  @include declaration('border-left-width', $value, flags-gutter($flags, 'right'));
-  @include declaration('border-left-style', solid, flags-gutter($flags, 'right'));
-  @include declaration('border-top-width', $value, flags-gutter($flags, 'bottom'));
-  @include declaration('border-top-style', solid, flags-gutter($flags, 'bottom'));
-  @include declaration('border-right-width', $value, flags-gutter($flags, 'left'));
-  @include declaration('border-right-style', solid, flags-gutter($flags, 'left'));
+@function drops-caret--shape-mixin($value, $flags) {
+  @return (
+    ('border-bottom-width', $value, flags-gutter($flags, 'top')),
+    ('border-bottom-style', solid, flags-gutter($flags, 'top')),
+    ('border-left-width', $value, flags-gutter($flags, 'right')),
+    ('border-left-style', solid, flags-gutter($flags, 'right')),
+    ('border-top-width', $value, flags-gutter($flags, 'bottom')),
+    ('border-top-style', solid, flags-gutter($flags, 'bottom')),
+    ('border-right-width', $value, flags-gutter($flags, 'left')),
+    ('border-right-style', solid, flags-gutter($flags, 'left')),
+  );
 }
 
-@mixin drops-caret--color($value, $flags) {
-  @include declaration('border-bottom-color', $value, flags-gutter($flags, 'top'));
-  @include declaration('border-left-color', $value, flags-gutter($flags, 'right'));
-  @include declaration('border-top-color', $value, flags-gutter($flags, 'bottom'));
-  @include declaration('border-right-color', $value, flags-gutter($flags, 'left'));
+@function drops-caret--color-mixin($value, $flags) {
+  @return (
+    ('border-bottom-color', $value, flags-gutter($flags, 'top')),
+    ('border-left-color', $value, flags-gutter($flags, 'right')),
+    ('border-top-color', $value, flags-gutter($flags, 'bottom')),
+    ('border-right-color', $value, flags-gutter($flags, 'left')),
+  );
 }
 
-@mixin drops-caret--position($value, $flags) {
-  @include declaration('bottom', 100%, flags-gutter($flags, 'top'));
-  @include declaration('left', 50%, flags-gutter($flags, 'top'));
-  @include declaration('transform', translateX(-50%), flags-gutter($flags, 'top'));
+@function drops-caret--position-mixin($value, $flags) {
+  @return (
+    ('bottom', 100%, flags-gutter($flags, 'top')),
+    ('left', 50%, flags-gutter($flags, 'top')),
+    ('transform', translateX(-50%), flags-gutter($flags, 'top')),
 
-  @include declaration('left', 100%, flags-gutter($flags, 'right'));
-  @include declaration('top', 50%, flags-gutter($flags, 'right'));
-  @include declaration('transform', translateY(-50%), flags-gutter($flags, 'right'));
+    ('left', 100%, flags-gutter($flags, 'right')),
+    ('top', 50%, flags-gutter($flags, 'right')),
+    ('transform', translateY(-50%), flags-gutter($flags, 'right')),
 
-  @include declaration('top', 100%, flags-gutter($flags, 'bottom'));
-  @include declaration('left', 50%, flags-gutter($flags, 'bottom'));
-  @include declaration('transform', translateX(-50%), flags-gutter($flags, 'bottom'));
+    ('top', 100%, flags-gutter($flags, 'bottom')),
+    ('left', 50%, flags-gutter($flags, 'bottom')),
+    ('transform', translateX(-50%), flags-gutter($flags, 'bottom')),
 
-  @include declaration('right', 100%, flags-gutter($flags, 'left'));
-  @include declaration('top', 50%, flags-gutter($flags, 'left'));
-  @include declaration('transform', translateY(-50%), flags-gutter($flags, 'left'));
+    ('right', 100%, flags-gutter($flags, 'left')),
+    ('top', 50%, flags-gutter($flags, 'left')),
+    ('transform', translateY(-50%), flags-gutter($flags, 'left')),
+  );
 }
 
-@mixin drops-caret--margin($value, $flags) {
-  @include declaration('margin-bottom', $value, flags-gutter($flags, 'top'));
-  @include declaration('margin-left', $value, flags-gutter($flags, 'right'));
-  @include declaration('margin-top', $value, flags-gutter($flags, 'bottom'));
-  @include declaration('margin-right', $value, flags-gutter($flags, 'left'));
-
+@function drops-caret--margin-mixin($value, $flags) {
+  @return (
+  ('margin-bottom', $value, flags-gutter($flags, 'top')),
+  ('margin-left', $value, flags-gutter($flags, 'right')),
+  ('margin-top', $value, flags-gutter($flags, 'bottom')),
+  ('margin-right', $value, flags-gutter($flags, 'left')),
+  );
 }
