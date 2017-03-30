@@ -25,39 +25,40 @@
         </p>
 
         <!-- Dropdown -->
-        <div class="c-drop" id="dropdown">
-            <nav class="c-drop__menu">
-                <a class="c-drop__anchor" href="#">Drop anchor</a>
-                <a class="c-drop__anchor" href="#">Drop anchor</a>
-                <a class="c-drop__anchor" href="#">Drop anchor</a>
-                <hr class="c-drop__divider">
-                <h6 class="c-drop__heading">Drop heading</h6>
-                <a class="c-drop__anchor" href="#">Drop anchor</a>
-                <a class="c-drop__anchor" href="#">Drop anchor</a>
-                <hr class="c-drop__divider">
-                <h6 class="c-drop__heading">Drop heading</h6>
-                <a class="c-drop__anchor" href="#">Drop anchor</a>
+        <div class="drop" id="dropdown">
+            <nav class="drop__menu">
+                <a class="drop__anchor" href="#">Drop anchor</a>
+                <a class="drop__anchor" href="#">Drop anchor</a>
+                <a class="drop__anchor" href="#">Drop anchor</a>
+                <hr class="drop__divider">
+                <h6 class="drop__heading">Drop heading</h6>
+                <a class="drop__anchor" href="#">Drop anchor</a>
+                <a class="drop__anchor" href="#">Drop anchor</a>
+                <hr class="drop__divider">
+                <h6 class="drop__heading">Drop heading</h6>
+                <a class="drop__anchor" href="#">Drop anchor</a>
             </nav>
         </div>
 
         <!-- Popover -->
-        <div class="c-drop c-drop--popover" id="popover">
-            <h6 class="c-drop__header">Drop header</h6>
+        <div class="drop drop--popover" id="popover">
+            <h6 class="drop__header">Drop header</h6>
 
-            <div class="c-drop__content">
+            <div class="drop__content">
                 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dignissimos, assumenda dolorem. Natus eum reprehenderit autem molestiae quae nobis, ratione quasi. Voluptatem fuga, neque nostrum porro reprehenderit laborum saepe voluptate ea.
             </div>
         </div>
 
         <!-- Tooltip -->
-        <div class="c-drop c-drop--tooltip" id="tooltip">
-            <div class="c-drop__content">
+        <div class="drop drop--tooltip" id="tooltip">
+            <div class="drop__content">
                 Lorem ipsum dolor sit amet
             </div>
 
-            <span class="c-drop--caret"></span>
+            <span class="drop--caret"></span>
         </div>
 
+        <script src="./bower_components/tether/dist/js/tether.min.js"></script>
         <script src="./javascript/drops.js"></script>
         <script>
             var drops = new TrowelDrops(document.querySelectorAll('button'));
