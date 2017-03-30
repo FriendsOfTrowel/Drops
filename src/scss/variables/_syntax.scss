@@ -1,6 +1,5 @@
-$drops--prefix: 'c' !default;
 $drops--syntax: (
-  'prefix': $drops--prefix,
+  'prefix': null,
   'separator': (
     'prefix': '-',
     'element': '__',
