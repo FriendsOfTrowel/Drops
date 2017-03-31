@@ -1,3 +1,5 @@
-@mixin drops-divider--border-width($value, $flags) {
-  @include declaration('border-width', $value 0 0, $flags);
+@function drops-divider--border-width-mixin($value, $flags) {
+  @return (
+    ('border-width', $value 0 0, $flags),
+  );
 }

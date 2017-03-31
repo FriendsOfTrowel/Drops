@@ -78,7 +78,7 @@ gulp.task('script', ['script_test', 'script_dest']);
 gulp.task('bower', () => gulp.src('./test/src/bower_components/**/*').pipe(gulp.dest('./test/dest/bower_components')));
 
 
-gulp.task('default', ['style', 'template_test', 'script']);
+gulp.task('default', ['bower', 'style', 'template_test', 'script']);
 gulp.task('watch', ['default'], () => {
   browserSync({
     notify: false,
