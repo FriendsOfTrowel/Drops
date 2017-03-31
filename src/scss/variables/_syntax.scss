@@ -1,8 +1,1 @@
-$drops--syntax: (
-  'prefix': null,
-  'separator': (
-    'prefix': '-',
-    'element': '__',
-    'modifier': '--',
-  ),
-);
+$drops--syntax: null !default;
