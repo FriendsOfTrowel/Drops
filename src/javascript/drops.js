@@ -240,7 +240,19 @@ class TrowelDrop {
                 }.bind(this), false);
 
                 this._trigger.addEventListener('mouseout', function(event) {
-                    if (!this._trigger.contains(event.toElement)) {
+                    var hoveringTrigger = event.toElement == this._trigger || this._trigger.contains(event.toElement);
+                    var hoveringDrop = event.toElement == this._drop || this._drop.contains(event.toElement);
+
+                    if (!hoveringTrigger && !hoveringDrop) {
+                        this.hide();
+                    }
+                }.bind(this), false);
+
+                this._drop.addEventListener('mouseout', function(event) {
+                    var hoveringTrigger = event.toElement == this._trigger || this._trigger.contains(event.toElement);
+                    var hoveringDrop = event.toElement == this._drop || this._drop.contains(event.toElement);
+
+                    if (!hoveringTrigger && !hoveringDrop) {
                         this.hide();
                     }
                 }.bind(this), false);
