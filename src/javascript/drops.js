@@ -1,280 +1,212 @@
-let isObject = item => {
-    return (item && typeof item === 'object' && !Array.isArray(item) && item !== null);
-}
-
-let mergeDeep = (target, source) => {
-    let output = Object.assign({}, target);
-
-    if (isObject(target) && isObject(source)) {
-        Object.keys(source).forEach(key => {
-            if (isObject(source[key])) {
-                if (!(key in target))
-                Object.assign(output, { [key]: source[key] });
-                else
-                output[key] = mergeDeep(target[key], source[key]);
-            } else {
-                Object.assign(output, { [key]: source[key] });
-            }
-        });
-    }
-    return output;
-}
-
-class TrowelDrops {
-    constructor(elements) {
-        for (let element in elements) {
-            let element_obj = new TrowelDrop(elements[element]);
-        }
-    }
+export default class TrowelDrops {
+  constructor(triggers) {
+    triggers.forEach(function(trigger, index) {
+      let trigger_obj = new TrowelDrop(trigger);
+    })
+  }
 }
 
 class TrowelDrop {
-    constructor(trigger, options = {}) {
-        if (window.Tether === undefined) {
-            throw new Error('Bootstrap tooltips require Tether (http://tether.io/)')
+  constructor(trigger, customOptions = {}) {
+    if (window.Tether === undefined) throw new Error('Trowel Drops require Tether (http://tether.io/)')
+
+    this.trigger = trigger;
+    this.drop = document.querySelector(this.trigger.getAttribute('data-href'));
+    this.options = customOptions;
+    this.tether = new Tether(this.tetherOptions);
+
+    this.options.visible ? this.show() : this.hide();
+    this.setGutterPositions();
+
+    return this.listener();
+  }
+
+  set options(customOptions) {
+    const defaultOptions = {
+      visible: false,
+      behavior: 'click',
+      position: 'bottomout leftin',
+    };
+
+    const options = Object.keys(defaultOptions).reduce((options, option) => {
+      options[option] = defaultOptions[option];
+
+      // 1st priority : data-options
+      if (this.trigger.getAttribute(`data-${option}`)) {
+        options[option] = this.trigger.getAttribute(`data-${option}`);
+
+        // make sure the option is a bool and not a string
+        if (option == 'visible') {
+          options[option] = options[option] == "true";
         }
 
-        if (typeof(trigger) == 'object') {
-            this._trigger = trigger;
-            this._drop = document.querySelector(this._trigger.getAttribute('data-href'));
-            this._options = this.setOptions(options);
-            this._tether = new Tether(this.getTetherOptions(this._options));
-            this._visible = this._options.visible;
-            this.turnVisibility();
-            this.setGutterPositions();
-            this._listener();
-        }
+      // 2nd priority : customOptions
+      } else if (customOptions[option]) {
+        options[option] = customOptions[option];
+      }
 
+      return options;
+    }, {});
+
+    const { posY, posX } = this.getPositions(options);
+
+    if (!['click', 'hover'].includes(options.behavior)) {
+      throw new Error('Trowel drops behavior option must be \'click\' or \'hover\'')
     }
 
-    setOptions(options) {
-        const defaultOptions = {
-            visible: false,
-            behavior: 'click',
-            position: 'bottomout leftin',
-        };
-
-        let fullOptions = mergeDeep(defaultOptions, options);
-
-        for (let option in defaultOptions) {
-            const dataOption = this._trigger.getAttribute(`data-${option}`);
-
-            if (dataOption) {
-                fullOptions[option] = dataOption;
-            }
-        }
-
-
-        const { posY, posX } = this.getPositions(fullOptions);
-
-        if (!['click', 'hover'].includes(fullOptions.behavior)) {
-            throw new Error('Trowel drops behavior option must be \'click\' or \'hover\'')
-        }
-
-        if (fullOptions.position.split(' ').length != 2) {
-            throw new Error('Trowel drops position option must be a string within two words describing Y (\'top\', \'middle\' or \'bottom\') and X (\'left\', \'center\' or \'right\') position')
-        }
-
-        if (!['topin', 'topout', 'middle', 'bottomin', 'bottomout'].includes(posY)) {
-            throw new Error('Trowel drops position option first word must be \'topin\', \'topout\', \'middle\', \'bottomin\' or \'bottomout\'')
-        }
-
-        if (!['leftin', 'leftout', 'center', 'rightin', 'rightout'].includes(posX)) {
-            throw new Error('Trowel drops position option second word must be \'leftin\', \'leftout\', \'center\', \'rightin\' or \'rightout\'')
-        }
-
-        return fullOptions;
+    if (options.position.split(' ').length != 2) {
+      throw new Error('Trowel drops position option must be a string within two words describing Y (\'top\', \'middle\' or \'bottom\') and X (\'left\', \'center\' or \'right\') position')
     }
 
-    getPositions(options) {
-        return {
-            options: options,
-            posY: options.position.split(' ')[0],
-            posX: options.position.split(' ')[1],
-        }
+    if (!['topin', 'topout', 'middle', 'bottomin', 'bottomout'].includes(posY)) {
+      throw new Error('Trowel drops position option first word must be \'topin\', \'topout\', \'middle\', \'bottomin\' or \'bottomout\'')
     }
 
-    getTetherOptions(options) {
-        const { posY, posX } = this.getPositions(options);
-        let attachmentX, attachmentY, targetAttachmentX, targetAttachmentY, gutterX, gutterY;
-
-        switch (posY) {
-            case 'topout':
-                attachmentY = 'bottom';
-                targetAttachmentY = 'top';
-                break;
-            case 'topin':
-                attachmentY = 'top';
-                targetAttachmentY = 'top';
-                break;
-            case 'bottomin':
-                attachmentY = 'bottom';
-                targetAttachmentY = 'bottom';
-                break;
-            case 'bottomout':
-                attachmentY = 'top';
-                targetAttachmentY = 'bottom';
-                break;
-            default:
-                attachmentY = 'center';
-                targetAttachmentY = 'center';
-        }
-
-        switch (posX) {
-            case 'leftout':
-                attachmentX = 'right';
-                targetAttachmentX = 'left';
-                break;
-            case 'leftin':
-                attachmentX = 'left';
-                targetAttachmentX = 'left';
-                break;
-            case 'rightin':
-                attachmentX = 'right';
-                targetAttachmentX = 'right';
-                break;
-            case 'rightout':
-                attachmentX = 'left';
-                targetAttachmentX = 'right';
-                break;
-            default:
-                attachmentX = 'center';
-                targetAttachmentX = 'center';
-        }
-
-        let config = {
-            element: this._drop,
-            target: this._trigger,
-            attachment: `${attachmentY} ${attachmentX}`,
-            targetAttachment: `${targetAttachmentY} ${targetAttachmentX}`,
-        };
-
-
-        return config;
+    if (!['leftin', 'leftout', 'center', 'rightin', 'rightout'].includes(posX)) {
+      throw new Error('Trowel drops position option second word must be \'leftin\', \'leftout\', \'center\', \'rightin\' or \'rightout\'')
     }
 
-    setGutterPositions() {
-        const { posY, posX } = this.getPositions(this._options);
-        let gutterY, gutterX;
+    return this._options = options;
+  }
 
-        switch (posY) {
-            case 'topout':
-                gutterY = 'bottom';
-                break;
-            case 'bottomout':
-                gutterY = 'top';
-                break;
-            default:
-                gutterY = 'none';
-        }
+  get options() {
+    return this._options;
+  }
 
-        switch (posX) {
-            case 'leftout':
-                gutterX = 'right';
-                break;
-            case 'rightout':
-                gutterX = 'left';
-                break;
-            default:
-                gutterX = 'none';
-        }
+  getPositions(options = this.options) {
+    return {
+      options: options,
+      posY: options.position.split(' ')[0],
+      posX: options.position.split(' ')[1],
+    }
+  }
 
-        this._drop.setAttribute('data-gutter', `${gutterY} ${gutterX}`)
+  get tetherOptions() {
+    const { posY, posX } = this.getPositions();
+    let attachmentX, attachmentY, targetAttachmentX, targetAttachmentY, gutterX, gutterY;
+
+    switch (posY) {
+      case 'topout':
+        attachmentY = 'bottom';
+        targetAttachmentY = 'top';
+        break;
+      case 'topin':
+        attachmentY = 'top';
+        targetAttachmentY = 'top';
+        break;
+      case 'bottomin':
+        attachmentY = 'bottom';
+        targetAttachmentY = 'bottom';
+        break;
+      case 'bottomout':
+        attachmentY = 'top';
+        targetAttachmentY = 'bottom';
+        break;
+      default:
+        attachmentY = 'center';
+        targetAttachmentY = 'center';
     }
 
-    show() {
-        this._visible = true;
-        this.turnVisibility();
+    switch (posX) {
+      case 'leftout':
+        attachmentX = 'right';
+        targetAttachmentX = 'left';
+        break;
+      case 'leftin':
+        attachmentX = 'left';
+        targetAttachmentX = 'left';
+        break;
+      case 'rightin':
+        attachmentX = 'right';
+        targetAttachmentX = 'right';
+        break;
+      case 'rightout':
+        attachmentX = 'left';
+        targetAttachmentX = 'right';
+        break;
+      default:
+        attachmentX = 'center';
+        targetAttachmentX = 'center';
     }
 
-    hide() {
-        this._visible = false;
-        this.turnVisibility();
+    let config = {
+      element: this.drop,
+      target: this.trigger,
+      attachment: `${attachmentY} ${attachmentX}`,
+      targetAttachment: `${targetAttachmentY} ${targetAttachmentX}`,
+    };
+
+
+    return config;
+  }
+
+  setGutterPositions() {
+    const { posY, posX } = this.getPositions();
+    let gutterY, gutterX;
+
+    switch (posY) {
+      case 'topout':
+        gutterY = 'bottom';
+        break;
+      case 'bottomout':
+        gutterY = 'top';
+        break;
+      default:
+        gutterY = 'none';
     }
 
-    isShown() {
-        return this._drop.style.display == 'block';
+    switch (posX) {
+      case 'leftout':
+        gutterX = 'right';
+        break;
+      case 'rightout':
+        gutterX = 'left';
+        break;
+      default:
+        gutterX = 'none';
     }
 
-    isHidden() {
-        return this._drop.style.display == 'none';
+    this.drop.setAttribute('data-gutter', `${gutterY} ${gutterX}`)
+  }
+
+  get isVisible() {
+    return this.drop.style.display == 'block';
+  }
+
+  show() {
+    return this.drop.style.display = 'block';
+  }
+
+  hide() {
+    return this.drop.style.display = 'none';
+  }
+
+  toggle() {
+    return this.isVisible ? this.hide() : this.show();
+  }
+
+  listener() {
+    if (this.options.behavior == 'click') {
+      this.trigger.addEventListener('click', this.toggle.bind(this));
+
+      // hide the drop when you click outside
+      document.addEventListener('click', function(event) {
+        const isClickInside = this.trigger.contains(event.target) || this.drop.contains(event.target);
+        if (!isClickInside && this.isVisible) this.hide();
+        return;
+      }.bind(this))
+
+    } else if (this.options.behavior == 'hover') {
+      this.trigger.addEventListener('mouseenter', this.show.bind(this));
+
+      [this.trigger, this.drop].map(element => {
+        element.addEventListener('mouseout', function(event) {
+          const hovering = this.trigger.contains(event.toElement) || this.drop.contains(event.toElement);
+          if (!hovering) this.hide();
+          return;
+        }.bind(this));
+      })
     }
+  }
 
-    toggle() {
-        this._visible = !this._visible;
-        this.turnVisibility();
-    }
-
-    turnVisibility() {
-        if (this._visible) {
-            this._generateEvent('show.trowel.drops');
-            this._drop.style.display = 'block';
-            this._generateEvent('shown.trowel.drops');
-        } else {
-            this._generateEvent('hide.trowel.drops');
-            this._drop.style.display = 'none';
-            this._generateEvent('display.trowel.drops');
-        }
-
-        this._tether.position();
-    }
-
-    _listener() {
-        switch (this._options.behavior) {
-            case 'click':
-                this._trigger.addEventListener('click', function(event) {
-                    this.toggle();
-                }.bind(this), false);
-
-                document.addEventListener('click', function(event) {
-                    var isClickInside = this._trigger.contains(event.target);
-
-                    if (!isClickInside && this.isShown()) {
-                        this.hide();
-                    }
-                }.bind(this), false);
-                break;
-            case 'hover':
-                this._trigger.addEventListener('mouseenter', function(event) {
-                    this.show();
-                }.bind(this), false);
-
-                this._trigger.addEventListener('mouseout', function(event) {
-                    var hoveringTrigger = event.toElement == this._trigger || this._trigger.contains(event.toElement);
-                    var hoveringDrop = event.toElement == this._drop || this._drop.contains(event.toElement);
-
-                    if (!hoveringTrigger && !hoveringDrop) {
-                        this.hide();
-                    }
-                }.bind(this), false);
-
-                this._drop.addEventListener('mouseout', function(event) {
-                    var hoveringTrigger = event.toElement == this._trigger || this._trigger.contains(event.toElement);
-                    var hoveringDrop = event.toElement == this._drop || this._drop.contains(event.toElement);
-
-                    if (!hoveringTrigger && !hoveringDrop) {
-                        this.hide();
-                    }
-                }.bind(this), false);
-
-                break;
-        }
-    }
-
-    _generateEvent(name) {
-        let event = new Event(name);
-
-        // Dispatch the event.
-        this._drop.dispatchEvent(event);
-    }
-
-    _tetherHorizontalPos(item) {
-        console.log(item);
-        if (item.attachment.left == 'right' && item.attachment.top == 'top' && item.targetAttachment.left == 'left' && item.targetAttachment.top == 'bottom') {
-            config.attachment = 'top right';
-            config.targetAttachment = 'bottom right';
-
-            this._tether.setOptions(config, false);
-        }
-    }
 }
