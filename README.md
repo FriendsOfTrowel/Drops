@@ -40,6 +40,8 @@ The main scss file to include to your main `.scss` file is located at the `./src
 If you don't want to customize the trowel component in `scss` you can use the css file available at `./dest/css/drops.css`. A minified version is available at the same location.
 
 #### *JavaScript*
+Trowel Drops requires [Tether](https://github.com/HubSpot/tether). Make sure the library is included before trowel-drops script.
+
 You have several javascript files for different use cases :
 * The browser ready file is available at `./dest/javascript/drops.js` (a minified version exists at `dest/javascript/drops.min.js`)
 * The script written in es2015 and ready to `import` is available at `./src/javascript/drops.js`
