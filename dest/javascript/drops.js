@@ -117,7 +117,10 @@ var TrowelDrop = function () {
     this.options.visible ? this.show() : this.hide();
     this.setGutterPositions();
 
-    return this.listener();
+    this.events = this.events();
+    this.listener();
+    this.element.dispatchEvent(this.events.mounted);
+    return;
   }
 
   _createClass(TrowelDrop, [{
@@ -168,17 +171,26 @@ var TrowelDrop = function () {
   }, {
     key: 'show',
     value: function show() {
-      return this.drop.style.display = 'block';
+      this.element.dispatchEvent(this.events.show);
+      this.drop.style.display = 'block';
+      this.element.dispatchEvent(this.events.shown);
+      return;
     }
   }, {
     key: 'hide',
     value: function hide() {
-      return this.drop.style.display = 'none';
+      this.element.dispatchEvent(this.events.hide);
+      this.drop.style.display = 'none';
+      this.element.dispatchEvent(this.events.hidden);
+      return;
     }
   }, {
     key: 'toggle',
     value: function toggle() {
-      return this.isVisible ? this.hide() : this.show();
+      this.element.dispatchEvent(this.events.toggle);
+      this.isVisible() ? this.hide() : this.show();
+      this.element.dispatchEvent(this.events.toggled);
+      return;
     }
   }, {
     key: 'listener',
@@ -205,6 +217,19 @@ var TrowelDrop = function () {
           }.bind(_this));
         });
       }
+    }
+  }, {
+    key: 'events',
+    value: function events() {
+      var show = new Event('trowel.drop.show');
+      var shown = new Event('trowel.drop.shown');
+      var hide = new Event('trowel.drop.hide');
+      var hidden = new Event('trowel.drop.hidden');
+      var toggle = new Event('trowel.drop.toggle');
+      var toggled = new Event('trowel.drop.toggled');
+      var mounted = new Event('trowel.drop.mounted');
+
+      return { show: show, shown: shown, hide: hide, hidden: hidden, toggle: toggle, toggled: toggled, mounted: mounted };
     }
   }, {
     key: 'options',
