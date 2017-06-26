@@ -20,7 +20,7 @@ class TrowelDrop {
 
     this.events = this.events();
     this.listener();
-    this.element.dispatchEvent(this.events.mounted);
+    this.drop.dispatchEvent(this.events.mounted);
     return;
   }
 
@@ -177,23 +177,23 @@ class TrowelDrop {
   }
 
   show() {
-    this.element.dispatchEvent(this.events.show);
+    this.drop.dispatchEvent(this.events.show);
     this.drop.style.display = 'block';
-    this.element.dispatchEvent(this.events.shown);
+    this.drop.dispatchEvent(this.events.shown);
     return;
   }
 
   hide() {
-    this.element.dispatchEvent(this.events.hide);
+    this.drop.dispatchEvent(this.events.hide);
     this.drop.style.display = 'none';
-    this.element.dispatchEvent(this.events.hidden);
+    this.drop.dispatchEvent(this.events.hidden);
     return;
   }
 
   toggle() {
-    this.element.dispatchEvent(this.events.toggle);
+    this.drop.dispatchEvent(this.events.toggle);
     this.isVisible ? this.hide() : this.show();
-    this.element.dispatchEvent(this.events.toggled);
+    this.drop.dispatchEvent(this.events.toggled);
     return;
   }
 

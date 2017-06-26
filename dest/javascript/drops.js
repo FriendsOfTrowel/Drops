@@ -119,7 +119,7 @@ var TrowelDrop = function () {
 
     this.events = this.events();
     this.listener();
-    this.element.dispatchEvent(this.events.mounted);
+    this.drop.dispatchEvent(this.events.mounted);
     return;
   }
 
@@ -171,25 +171,25 @@ var TrowelDrop = function () {
   }, {
     key: 'show',
     value: function show() {
-      this.element.dispatchEvent(this.events.show);
+      this.drop.dispatchEvent(this.events.show);
       this.drop.style.display = 'block';
-      this.element.dispatchEvent(this.events.shown);
+      this.drop.dispatchEvent(this.events.shown);
       return;
     }
   }, {
     key: 'hide',
     value: function hide() {
-      this.element.dispatchEvent(this.events.hide);
+      this.drop.dispatchEvent(this.events.hide);
       this.drop.style.display = 'none';
-      this.element.dispatchEvent(this.events.hidden);
+      this.drop.dispatchEvent(this.events.hidden);
       return;
     }
   }, {
     key: 'toggle',
     value: function toggle() {
-      this.element.dispatchEvent(this.events.toggle);
+      this.drop.dispatchEvent(this.events.toggle);
       this.isVisible ? this.hide() : this.show();
-      this.element.dispatchEvent(this.events.toggled);
+      this.drop.dispatchEvent(this.events.toggled);
       return;
     }
   }, {
