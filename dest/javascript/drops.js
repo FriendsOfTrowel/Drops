@@ -188,7 +188,7 @@ var TrowelDrop = function () {
     key: 'toggle',
     value: function toggle() {
       this.element.dispatchEvent(this.events.toggle);
-      this.isVisible() ? this.hide() : this.show();
+      this.isVisible ? this.hide() : this.show();
       this.element.dispatchEvent(this.events.toggled);
       return;
     }
