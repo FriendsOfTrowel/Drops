@@ -15,12 +15,13 @@ class TrowelDrop {
     this.options = customOptions;
     this.tether = new Tether(this.tetherOptions);
 
+    this.events = this.events();
+
     this.options.visible ? this.show() : this.hide();
     this.setGutterPositions();
 
-    this.events = this.events();
     this.listener();
-    this.element.dispatchEvent(this.events.mounted);
+    this.drop.dispatchEvent(this.events.mounted);
     return;
   }
 
@@ -177,23 +178,23 @@ class TrowelDrop {
   }
 
   show() {
-    this.element.dispatchEvent(this.events.show);
+    this.drop.dispatchEvent(this.events.show);
     this.drop.style.display = 'block';
-    this.element.dispatchEvent(this.events.shown);
+    this.drop.dispatchEvent(this.events.shown);
     return;
   }
 
   hide() {
-    this.element.dispatchEvent(this.events.hide);
+    this.drop.dispatchEvent(this.events.hide);
     this.drop.style.display = 'none';
-    this.element.dispatchEvent(this.events.hidden);
+    this.drop.dispatchEvent(this.events.hidden);
     return;
   }
 
   toggle() {
-    this.element.dispatchEvent(this.events.toggle);
-    this.isVisible() ? this.hide() : this.show();
-    this.element.dispatchEvent(this.events.toggled);
+    this.drop.dispatchEvent(this.events.toggle);
+    this.isVisible ? this.hide() : this.show();
+    this.drop.dispatchEvent(this.events.toggled);
     return;
   }
 
