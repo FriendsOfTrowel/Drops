@@ -15,10 +15,11 @@ class TrowelDrop {
     this.options = customOptions;
     this.tether = new Tether(this.tetherOptions);
 
+    this.events = this.events();
+
     this.options.visible ? this.show() : this.hide();
     this.setGutterPositions();
 
-    this.events = this.events();
     this.listener();
     this.drop.dispatchEvent(this.events.mounted);
     return;
